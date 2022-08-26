@@ -1,6 +1,6 @@
 # MyJQL
 
-*This is a simple database as my PJ for classwork.
+*This is a simplified key-value database.
 
 ## Introduction
 
