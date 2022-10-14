@@ -1,4 +1,3 @@
-/* DO NOT MODIFY THIS FILE IN ANY WAY! */
 
 #ifndef _MYJQL_H
 #define _MYJQL_H

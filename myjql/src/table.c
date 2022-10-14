@@ -5,8 +5,6 @@
 #include <stdio.h>
 
 void table_init(Table *table, const char *data_filename, const char *fsm_filename) {
-    //printf("now in table init!\n");
-    //my_test_print("now in table init\n");
     init_buffer_pool(data_filename, &table->data_pool);
     hash_table_init(fsm_filename, &table->fsm_pool, PAGE_SIZE / HASH_MAP_DIR_BLOCK_SIZE);
 }

@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 #define PAGE_SIZE 128
-// #define PAGE_SIZE 64
 
 #define PAGE_MASK (PAGE_SIZE - 1)
 

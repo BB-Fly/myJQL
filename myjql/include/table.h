@@ -6,12 +6,10 @@
 #include "block.h"
 
 typedef struct {
-    /* you can ADD anything in this struct */
     BufferPool data_pool;
     BufferPool fsm_pool;
 } Table;
 
-/* BEGIN: --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 typedef struct {
     /* off_t block_addr */
@@ -42,7 +40,6 @@ void table_delete(Table *table, RID rid);
 
 void print_rid(RID rid);
 
-/* END:   --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 /* void analyze_table(Table *table); */
 

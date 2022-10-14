@@ -6,7 +6,6 @@
 #define CACHE_PAGE 8
 
 typedef struct {
-  /* you can modify anything in this struct */
   FileInfo file;
   Page pages[CACHE_PAGE];
   off_t addrs[CACHE_PAGE];
@@ -14,7 +13,6 @@ typedef struct {
   size_t ref[CACHE_PAGE];
 } BufferPool;
 
-/* BEGIN: --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 void init_buffer_pool(const char *filename, BufferPool *pool);
 
@@ -24,7 +22,6 @@ Page *get_page(BufferPool *pool, off_t addr);
 
 void release(BufferPool *pool, off_t addr);
 
-/* END:   --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 /* void print_buffer_pool(BufferPool *pool); */
 

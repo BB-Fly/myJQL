@@ -3,17 +3,12 @@
 
 #include "file_io.h"
 
-/* BEGIN: --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 typedef struct {
     /* header section */
     short n_items;  /* number of allocated ItemPtr's */
     short head_ptr;  /* free space begin */
     short tail_ptr;  /* free space end */
-
-    /* ItemID section */
-
-    /* Item section */
 
     char data[PAGE_SIZE - 3 * sizeof(short)];  /* placeholder only */
 } Block;
@@ -48,10 +43,6 @@ short new_item(Block *block, ItemPtr item, short item_size);
 void delete_item(Block *block, short idx);
 
 short block_get_size(Block *block);
-
-/* END:   --------------------------------- DO NOT MODIFY! --------------------------------- */
-
-
 
 /* /* /* /* if item is NULL, print NULL */
 // typedef void (*printer_t)(ItemPtr item, short item_size);

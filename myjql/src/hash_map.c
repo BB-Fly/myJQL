@@ -5,7 +5,6 @@
 
 void hash_table_init(const char *filename, BufferPool *pool, off_t n_directory_blocks) {
     init_buffer_pool(filename, pool);
-    /* TODO: add code here */
     if(pool->file.length==0){
         HashMapControlBlock *ctrl = (HashMapControlBlock*)get_page(pool, 0);
         ctrl->max_size = n_directory_blocks * HASH_MAP_DIR_BLOCK_SIZE;

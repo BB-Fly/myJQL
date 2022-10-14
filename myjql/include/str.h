@@ -23,12 +23,10 @@ typedef struct {
 #define calc_str_chunk_size(len) ((len) + sizeof(RID) + sizeof(short))
 
 typedef struct {
-    /* you can ADD anything in this struct */
     StringChunk chunk;  /* current chunk */
     short idx;  /* current idx */
 } StringRecord;
 
-/* BEGIN: --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 void read_string(Table *table, RID rid, StringRecord *record);
 
@@ -49,7 +47,5 @@ void delete_string(Table *table, RID rid);
 size_t load_string(Table *table, const StringRecord *record, char *dest, size_t max_size);
 
 /* void chunk_printer(ItemPtr item, short item_size); */
-
-/* END:   --------------------------------- DO NOT MODIFY! --------------------------------- */
 
 #endif  /* _STR_H */

@@ -33,11 +33,6 @@ void myjql_init() {
 }
 
 void myjql_close() {
-    /* validate_buffer_pool(&bp_idx);
-    validate_buffer_pool(&tbl_rec.data_pool);
-    validate_buffer_pool(&tbl_rec.fsm_pool);
-    validate_buffer_pool(&tbl_str.data_pool);
-    validate_buffer_pool(&tbl_str.fsm_pool); */
     b_tree_close(&bp_idx);
     table_close(&tbl_rec);
     table_close(&tbl_str);

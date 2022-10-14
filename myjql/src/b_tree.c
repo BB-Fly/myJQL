@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 off_t NewBNode(BufferPool *pool){
-    //my_test_print("now in new node.\n");
     BCtrlBlock* ctrl = (BCtrlBlock*)get_page(pool,0);
 
     BNode* NewNode;
@@ -42,7 +41,6 @@ off_t NewBNode(BufferPool *pool){
 }
 
 void DeleteNode(BufferPool *pool, off_t addr){
-    //my_test_print("now in delete node.\n");
     BNode* node = (BNode*)get_page(pool, addr);
     BCtrlBlock* ctrl = (BCtrlBlock*) get_page(pool, 0);
 
@@ -56,7 +54,6 @@ void DeleteNode(BufferPool *pool, off_t addr){
 }
 
 off_t Find_Most_Left(BufferPool *pool, off_t addr){
-    //my_test_print("now in find left.\n");
     off_t block_addr = addr;
     BNode* block;
 
@@ -76,7 +73,6 @@ off_t Find_Most_Left(BufferPool *pool, off_t addr){
 }
 
 off_t Find_Most_Right(BufferPool *pool, off_t addr){
-    //my_test_print("now in find right.\n");
     off_t block_addr = addr;
     BNode* block;
 
@@ -96,7 +92,6 @@ off_t Find_Most_Right(BufferPool *pool, off_t addr){
 }
 
 off_t Find_Sibling(BufferPool *pool, off_t parent, int i){
-    //my_test_print("now in find sibling.\n");
     off_t sibling = 0;
     int limit = 2*DEGREE-1;
     BNode* p_block, *s_block;
@@ -140,7 +135,6 @@ off_t Find_Sibling(BufferPool *pool, off_t parent, int i){
 }
 
 off_t Find_Sibling_2(BufferPool *pool, off_t parent, int i, int* j){
-    //my_test_print("now in find sibling2.\n");
     off_t sibling = 0;
     int limit = DEGREE;
     BNode* p_block, *s_block;
@@ -187,7 +181,6 @@ off_t Find_Sibling_2(BufferPool *pool, off_t parent, int i, int* j){
 }
 
 off_t InsertKey(BufferPool *pool, int isKey, off_t parent, off_t X, RID Key, int i, int j){
-    //my_test_print("now in insert key.\n");
     int k;
 
     BNode *p_block, *n_block; 
@@ -241,7 +234,6 @@ off_t InsertKey(BufferPool *pool, int isKey, off_t parent, off_t X, RID Key, int
 }
 
 off_t RemoveKey(BufferPool *pool, int isKey, off_t parent, off_t X, int i, int j){
-    //my_test_print("now in remove key\n");
     int k, limit;
 
     BNode *p_block, *n_block; 
@@ -297,7 +289,6 @@ off_t RemoveKey(BufferPool *pool, int isKey, off_t parent, off_t X, int i, int j
 }
 
 off_t MoveKey(BufferPool *pool, off_t src, off_t dst, off_t parent,int i, int n, b_tree_row_row_cmp_t cmp){
-    //my_test_print("now in move key.\n");
     RID tmpKey;
     off_t child, t1 = 0, t2 = 0;
     int j, SrcInFront;
@@ -416,7 +407,6 @@ off_t MoveKey(BufferPool *pool, off_t src, off_t dst, off_t parent,int i, int n,
 }
 
 off_t SplitNode(BufferPool *pool, off_t parent, off_t X, int i){
-    //my_test_print("now in split node.\n");
     int j, k, limit;
     off_t new_addr;
 
@@ -465,7 +455,6 @@ off_t SplitNode(BufferPool *pool, off_t parent, off_t X, int i){
 }
 
 off_t MergeNode(BufferPool *pool, off_t parent, off_t X, off_t S, int i, b_tree_row_row_cmp_t cmp){
-    //my_test_print("now in merge node.\n");
     int limit;
     BNode *x_block;
     BNode *s_block = (BNode*)get_page(pool, S);
@@ -746,9 +735,7 @@ RID B_Search(BufferPool *pool, off_t T, void *key, size_t size, b_tree_ptr_row_c
 // }
 
 void b_tree_init(const char *filename, BufferPool *pool) {
-    //my_test_print("now in b tree init.\n");
     init_buffer_pool(filename, pool);
-    /* TODO: add code here */
     if(pool->file.length==0){
         BCtrlBlock* ctrl = (BCtrlBlock*)get_page(pool, 0);
         ctrl->root_node = PAGE_SIZE;
@@ -788,7 +775,6 @@ void b_tree_close(BufferPool *pool) {
 }
 
 RID b_tree_search(BufferPool *pool, void *key, size_t size, b_tree_ptr_row_cmp_t cmp) {
-    //my_test_print("now in b tree search.\n");
     BCtrlBlock *ctrl = (BCtrlBlock*)get_page(pool, 0);
     off_t T = ctrl->root_node;
     release(pool,0);
@@ -798,9 +784,8 @@ RID b_tree_search(BufferPool *pool, void *key, size_t size, b_tree_ptr_row_cmp_t
     return rid;
 }
 
-RID b_tree_insert(BufferPool *pool, RID rid, b_tree_row_row_cmp_t cmp, b_tree_insert_nonleaf_handler_t fun) {
+RID b_tree_insert(BufferPool *pool, RID rid, b_tree_row_row_cmp_t cmp) {
 
-    //my_test_print("now in b tree insert.\n");
     BCtrlBlock *ctrl = (BCtrlBlock*)get_page(pool, 0);
     off_t T = ctrl->root_node;
     release(pool,0);
@@ -811,14 +796,10 @@ RID b_tree_insert(BufferPool *pool, RID rid, b_tree_row_row_cmp_t cmp, b_tree_in
     ctrl->root_node = T;
     release(pool, 0);
 
-    //TravelData(pool, T);
-    //RecursiveTravel(pool, T, 0);
-
     return rid;
 }
 
-void b_tree_delete(BufferPool *pool, RID rid, b_tree_row_row_cmp_t cmp, b_tree_insert_nonleaf_handler_t fun, b_tree_delete_nonleaf_handler_t fun2) {
-    //my_test_print("now in b tree delete.\n");
+void b_tree_delete(BufferPool *pool, RID rid, b_tree_row_row_cmp_t cmp) {
     BCtrlBlock *ctrl = (BCtrlBlock*)get_page(pool, 0);
     off_t T = ctrl->root_node;
     release(pool,0);
